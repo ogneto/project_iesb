@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TeachersModule } from './teachers/teachers.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         autoLoadEntities: true, //Just to study.
       }),
     }),
+    TeachersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
