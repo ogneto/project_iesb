@@ -20,8 +20,8 @@ PATCH {{defaultUrl}}593e2c09-4597-4cfa-ba08-729a15296629
 Content-Type: application/json
 
 {
-    "course_name": "Database",
-    "description": "Database course"
+    "course_name": "Portuguese",
+    "description": "Portuguese course"
 }
 
 ### This route removes a course by its id:
