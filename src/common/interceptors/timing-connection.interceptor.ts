@@ -15,8 +15,8 @@ export class TimingConnectionInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap(() => {
         const finalTime = Date.now();
-        const elipsedTime = finalTime - startTime;
-        console.log(`This was executed in ${elipsedTime} milliseconds`);
+        const elapsedTime = finalTime - startTime;
+        console.log(`This was executed in ${elapsedTime} milliseconds`);
       }),
     );
   }
