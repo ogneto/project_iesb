@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,6 +12,12 @@ export class CoursesService {
     private readonly courseRepository: Repository<Course>,
   ) {}
 
+  notFound() {
+    throw new NotFoundException(
+      `Sorry. I can't find this student. Please try again.`,
+    );
+  }
+
   create(createCourseDto: CreateCourseDto) {
     return 'This action adds a new course';
   }
@@ -24,8 +30,14 @@ export class CoursesService {
     return all;
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} course`;
+  async findOne(id: string) {
+    const course = await this.courseRepository.findOneBy({
+      id,
+    });
+    if (!course) {
+      return this.notFound();
+    }
+    return course;
   }
 
   update(id: string, updateCourseDto: UpdateCourseDto) {

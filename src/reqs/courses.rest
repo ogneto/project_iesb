@@ -2,3 +2,6 @@
 
 ### This route finds all courses
 {{defaultUrl}}
+
+### This route returns one course by its id
+{{defaultUrl}}5382241e-4b26-4edd-b73f-4e92af616c43
