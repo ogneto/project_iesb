@@ -1,3 +1,4 @@
+import { Student } from 'src/students/entities/student.entity';
 import { Teacher } from 'src/teachers/entities/teacher.entity';
 import {
   Column,
@@ -26,5 +27,8 @@ export class Course {
   updatedAt: string;
 
   @OneToMany(() => Teacher, (teacher) => teacher.course)
-  Teachers: Teacher[];
+  teachers: Teacher[];
+
+  @OneToMany(() => Student, (student) => student.course)
+  students: Student[];
 }

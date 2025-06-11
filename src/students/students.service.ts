@@ -8,12 +8,14 @@ import { UpdateStudentDto } from './dto/update-student.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from './entities/student.entity';
 import { Repository } from 'typeorm';
+import { CoursesService } from 'src/courses/courses.service';
 
 @Injectable()
 export class StudentsService {
   constructor(
     @InjectRepository(Student)
     private readonly studentRepository: Repository<Student>,
+    private readonly courseService: CoursesService,
   ) {}
 
   notFound() {
@@ -24,10 +26,17 @@ export class StudentsService {
 
   public async create(createStudentDto: CreateStudentDto) {
     try {
+      const { courseId } = createStudentDto;
+      const course = await this.courseService.findOne(courseId);
+      if (!course) {
+        return this.courseService.notFound();
+      }
+
       const student = {
         name: createStudentDto.name,
         email: createStudentDto.email,
         phone_number: createStudentDto.phone_number,
+        course,
       };
       const newStudent = await this.studentRepository.save(student);
       return student;

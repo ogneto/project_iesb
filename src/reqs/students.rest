@@ -11,9 +11,10 @@ POST {{defaultUrl}}
 Content-Type: application/json
 
 {
-    "name": "João Pedro",
-    "email": "joao@gmail.com",
-    "phone_number": "(61) 99535-3425"
+    "name": "João Basso",
+    "email": "joaobasso@gmail.com",
+    "phone_number": "(61) 93535-2423",
+    "courseId": "f7c8def4-b2d6-42ef-812a-bf00e183fef4"
 }
 
 ### This routes updates a student by its id
