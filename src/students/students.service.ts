@@ -43,7 +43,11 @@ export class StudentsService {
   }
 
   async findAll() {
-    return await this.studentRepository.find();
+    const allStudents = await this.studentRepository.find();
+    if (allStudents.length === 0) {
+      return `There are no students. Please register one and then try again.`;
+    }
+    return allStudents;
   }
 
   async findOne(id: string) {

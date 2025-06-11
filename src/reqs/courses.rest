@@ -1,1 +1,4 @@
 @defaultUrl = http://localhost:3000/courses/
+
+### This route finds all courses
+{{defaultUrl}}

@@ -41,8 +41,12 @@ export class TeachersService {
     }
   }
 
-  async findAll() {
-    return await this.teacherRepository.find();
+  async findall() {
+    const allTeachers = await this.teacherRepository.find();
+    if (allTeachers.length === 0) {
+      return `There are no teachers. Please register one and then try again.`;
+    }
+    return allTeachers;
   }
 
   async findOne(id: string) {
