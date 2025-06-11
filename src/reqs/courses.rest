@@ -23,3 +23,6 @@ Content-Type: application/json
     "course_name": "Database",
     "description": "Database course"
 }
+
+### This route removes a course by its id:
+DELETE {{defaultUrl}}a8cede5b-2fa2-4cb9-995a-6887f6e3f4b9
