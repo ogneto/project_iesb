@@ -1,0 +1,28 @@
+@defaultUrl = http://localhost:3000/students/
+
+### This route finds all students
+GET {{defaultUrl}}
+
+### This route finds one studeny by its id
+GET {{defaultUrl}}a0d20a31-ee3f-4644-af38-d7a8ab8f1af8
+
+### This route creates a new student
+POST {{defaultUrl}}
+Content-Type: application/json
+
+{
+    "name": "João Pedro",
+    "email": "joao@gmail.com",
+    "phone_number": "(61) 99535-3425"
+}
+
+### This routes updates a student by its id
+PATCH {{defaultUrl}}a0d20a31-ee3f-4644-af38-d7a8ab8f1af8
+Content-Type: application/json
+
+{
+    "name": "João Pedro Martins"
+}
+
+### This routes deletes a student by its id
+DELETE {{defaultUrl}}a0d20a31-ee3f-4644-af38-d7a8ab8f1af8

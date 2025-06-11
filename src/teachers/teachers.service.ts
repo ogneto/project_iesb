@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,12 +23,22 @@ export class TeachersService {
   }
 
   async create(createTeacherDto: CreateTeacherDto) {
-    const teacher = {
-      name: createTeacherDto.name,
-      email: createTeacherDto.email,
-    };
-    const newTeacher = await this.teacherRepository.save(teacher);
-    return newTeacher;
+    try {
+      const teacher = {
+        name: createTeacherDto.name,
+        email: createTeacherDto.email,
+      };
+      const newTeacher = await this.teacherRepository.save(teacher);
+      return newTeacher;
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new ConflictException(
+          'This email is duplicate. Please try other.',
+        );
+      }
+
+      throw error;
+    }
   }
 
   async findAll() {

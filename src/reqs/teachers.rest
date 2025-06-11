@@ -6,7 +6,7 @@ GET {{defaultUrl}}
 ### This route returns one teacher by its id
 GET {{defaultUrl}}41383b80-0a3c-479e-a0b0-1386994bbd75
 
-### This route saves a teacher
+### This route creates a teacher
 POST {{defaultUrl}}
 Content-Type: application/json
 
