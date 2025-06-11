@@ -14,7 +14,7 @@ export class Teacher {
   @Column({ type: 'varchar', length: 50 })
   name: string;
 
-  @Column({ type: 'varchar', length: 40 })
+  @Column({ type: 'varchar', length: 40, unique: true })
   email: string;
 
   @CreateDateColumn()

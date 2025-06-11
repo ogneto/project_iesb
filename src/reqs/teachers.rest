@@ -1,0 +1,27 @@
+@defaultUrl = http://localhost:3000/teachers/
+
+### This route returns all teachers
+GET {{defaultUrl}}
+
+### This route returns one teacher by its id
+GET {{defaultUrl}}41383b80-0a3c-479e-a0b0-1386994bbd75
+
+### This route saves a teacher
+POST {{defaultUrl}}
+Content-Type: application/json
+
+{
+    "name": "Apiano",
+    "email": "apiano@iesb.com"
+}
+
+### This route updates a teacher by its id
+PATCH {{defaultUrl}}41383b80-0a3c-479e-a0b0-1386994bbd75
+Content-Type: application/json
+
+{
+    "name": "Michel Barros Almeida"
+}
+
+### This route deletes a teacher by its id
+DELETE {{defaultUrl}}41383b80-0a3c-479e-a0b0-1386994bbd75

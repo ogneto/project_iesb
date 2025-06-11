@@ -1,26 +1,68 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Teacher } from './entities/teacher.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TeachersService {
-  create(createTeacherDto: CreateTeacherDto) {
-    return 'This action adds a new teacher';
+  constructor(
+    @InjectRepository(Teacher)
+    private readonly teacherRepository: Repository<Teacher>,
+  ) {}
+
+  notFound() {
+    throw new NotFoundException(
+      `Sorry. I can't find this teacher. Please try again.`,
+    );
   }
 
-  findAll() {
-    return `This action returns all teachers`;
+  async create(createTeacherDto: CreateTeacherDto) {
+    const teacher = {
+      name: createTeacherDto.name,
+      email: createTeacherDto.email,
+    };
+    const newTeacher = await this.teacherRepository.save(teacher);
+    return newTeacher;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} teacher`;
+  async findAll() {
+    return await this.teacherRepository.find();
   }
 
-  update(id: number, updateTeacherDto: UpdateTeacherDto) {
-    return `This action updates a #${id} teacher`;
+  async findOne(id: string) {
+    const teacher = await this.teacherRepository.findOneBy({
+      id,
+    });
+    if (!teacher) {
+      this.notFound();
+    }
+    return teacher;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} teacher`;
+  async update(id: string, updateTeacherDto: UpdateTeacherDto) {
+    const teacher = {
+      name: updateTeacherDto?.name,
+      email: updateTeacherDto?.email,
+    };
+    const updatedTeacher = await this.teacherRepository.preload({
+      id,
+      ...teacher,
+    });
+    if (!updatedTeacher) {
+      return this.notFound();
+    }
+    return await this.teacherRepository.save(updatedTeacher);
+  }
+
+  async remove(id: string) {
+    const teacher = await this.teacherRepository.findOneBy({
+      id,
+    });
+    if (!teacher) {
+      return this.notFound();
+    }
+    return await this.teacherRepository.remove(teacher);
   }
 }
