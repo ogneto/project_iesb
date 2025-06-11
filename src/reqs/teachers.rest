@@ -12,7 +12,8 @@ Content-Type: application/json
 
 {
     "name": "Apiano",
-    "email": "apiano@iesb.com"
+    "email": "apiano@iesb.com",
+    "course": "593e2c09-4597-4cfa-ba08-729a15296629"
 }
 
 ### This route updates a teacher by its id

@@ -1,7 +1,9 @@
+import { Teacher } from 'src/teachers/entities/teacher.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -22,4 +24,7 @@ export class Course {
 
   @UpdateDateColumn()
   updatedAt: string;
+
+  @OneToMany(() => Teacher, (teacher) => teacher.course)
+  Teachers: Teacher[];
 }
