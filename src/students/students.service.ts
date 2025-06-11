@@ -22,7 +22,7 @@ export class StudentsService {
     );
   }
 
-  async create(createStudentDto: CreateStudentDto) {
+  public async create(createStudentDto: CreateStudentDto) {
     try {
       const student = {
         name: createStudentDto.name,
@@ -42,7 +42,7 @@ export class StudentsService {
     }
   }
 
-  async findAll() {
+  public async findAll() {
     const allStudents = await this.studentRepository.find();
     if (allStudents.length === 0) {
       return `There are no students. Please register one and then try again.`;
@@ -50,7 +50,7 @@ export class StudentsService {
     return allStudents;
   }
 
-  async findOne(id: string) {
+  public async findOne(id: string) {
     const student = await this.studentRepository.findOneBy({
       id,
     });
@@ -60,7 +60,7 @@ export class StudentsService {
     return student;
   }
 
-  async update(id: string, updateStudentDto: UpdateStudentDto) {
+  public async update(id: string, updateStudentDto: UpdateStudentDto) {
     const student = {
       name: updateStudentDto?.name,
       email: updateStudentDto?.email,
@@ -78,7 +78,7 @@ export class StudentsService {
     return await this.studentRepository.save(updatedStudent);
   }
 
-  async remove(id: string) {
+  public async remove(id: string) {
     const student = await this.studentRepository.findOneBy({
       id,
     });

@@ -22,7 +22,7 @@ export class TeachersService {
     );
   }
 
-  async create(createTeacherDto: CreateTeacherDto) {
+  public async create(createTeacherDto: CreateTeacherDto) {
     try {
       const teacher = {
         name: createTeacherDto.name,
@@ -41,7 +41,7 @@ export class TeachersService {
     }
   }
 
-  async findAll() {
+  public async findAll() {
     const allTeachers = await this.teacherRepository.find();
     if (allTeachers.length === 0) {
       return `There are no teachers. Please register one and then try again.`;
@@ -49,7 +49,7 @@ export class TeachersService {
     return allTeachers;
   }
 
-  async findOne(id: string) {
+  public async findOne(id: string) {
     const teacher = await this.teacherRepository.findOneBy({
       id,
     });
@@ -59,7 +59,7 @@ export class TeachersService {
     return teacher;
   }
 
-  async update(id: string, updateTeacherDto: UpdateTeacherDto) {
+  public async update(id: string, updateTeacherDto: UpdateTeacherDto) {
     const teacher = {
       name: updateTeacherDto?.name,
       email: updateTeacherDto?.email,
@@ -74,7 +74,7 @@ export class TeachersService {
     return await this.teacherRepository.save(updatedTeacher);
   }
 
-  async remove(id: string) {
+  public async remove(id: string) {
     const teacher = await this.teacherRepository.findOneBy({
       id,
     });

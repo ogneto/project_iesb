@@ -18,7 +18,7 @@ export class CoursesService {
     );
   }
 
-  async create(createCourseDto: CreateCourseDto) {
+  public async create(createCourseDto: CreateCourseDto) {
     const course = {
       course_name: createCourseDto.course_name,
       description: createCourseDto.description,
@@ -26,7 +26,7 @@ export class CoursesService {
     return await this.courseRepository.save(course);
   }
 
-  async findAll() {
+  public async findAll() {
     const all = await this.courseRepository.find();
     if (all.length === 0) {
       return `There are no courses. Please register one and then try again.`;
@@ -34,7 +34,7 @@ export class CoursesService {
     return all;
   }
 
-  async findOne(id: string) {
+  public async findOne(id: string) {
     const course = await this.courseRepository.findOneBy({
       id,
     });
@@ -44,7 +44,7 @@ export class CoursesService {
     return course;
   }
 
-  async update(id: string, updateCourseDto: UpdateCourseDto) {
+  public async update(id: string, updateCourseDto: UpdateCourseDto) {
     const updatedCourse = {
       course_name: updateCourseDto?.course_name,
       description: updateCourseDto?.description,
@@ -59,7 +59,7 @@ export class CoursesService {
     return await this.courseRepository.save(course);
   }
 
-  async remove(id: string) {
+  public async remove(id: string) {
     const course = await this.courseRepository.findOneBy({
       id,
     });
